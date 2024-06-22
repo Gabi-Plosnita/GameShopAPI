@@ -20,18 +20,18 @@ namespace GameShop.API.Controllers
         [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public List<GameCompanyResponseDto> GetAll()
+        public ActionResult<List<GameCompanyResponseDto>> GetAll()
         {
-            return _gameCompanyService.GetAll();
+            return Ok(_gameCompanyService.GetAll());
         }
 
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public GameCompanyResponseDto GetById([FromRoute] int id)
+        public ActionResult<GameCompanyResponseDto> GetById([FromRoute] int id)
         {
-            return _gameCompanyService.GetById(id);
+            return Ok(_gameCompanyService.GetById(id));
         }
 
 
@@ -39,9 +39,10 @@ namespace GameShop.API.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public void Create([FromBody] GameCompanyRequestDto gameCompanyDto)
+        public IActionResult Create([FromBody] GameCompanyRequestDto gameCompanyDto)
         {
             _gameCompanyService.Create(gameCompanyDto);
+            return Created();
         }
 
 
@@ -50,9 +51,10 @@ namespace GameShop.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public void Update([FromRoute] int id, [FromBody] GameCompanyRequestDto updatedGameCompanyDto)
+        public IActionResult Update([FromRoute] int id, [FromBody] GameCompanyRequestDto updatedGameCompanyDto)
         {
             _gameCompanyService.Update(id, updatedGameCompanyDto);
+            return NoContent();
         }
 
 
@@ -60,9 +62,11 @@ namespace GameShop.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public void Delete([FromRoute] int id)
+        public IActionResult Delete([FromRoute] int id)
         {
             _gameCompanyService.Delete(id);
+            return NoContent();
+
         }   
     }
 }
