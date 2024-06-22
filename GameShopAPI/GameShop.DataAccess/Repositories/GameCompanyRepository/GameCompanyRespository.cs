@@ -40,7 +40,7 @@ namespace GameShop.DataAccess.Repositories.GameCompanyRepository
             }
             gameCompany.Name = updatedGameCompany.Name;
             gameCompany.Email = updatedGameCompany.Email;
-            _context.SaveChanges();
+            SaveChanges();
         }
 
         public void Delete(int id)
@@ -57,6 +57,7 @@ namespace GameShop.DataAccess.Repositories.GameCompanyRepository
             }
 
             _context.GameCompanies.Remove(gameCompany);
+            SaveChanges();
         }
     }
 }

@@ -45,7 +45,7 @@ namespace GameShop.DataAccess.Repositories.GameRepository
             }
             game.Name = updatedGame.Name;
             game.Price = updatedGame.Price;
-            _context.SaveChanges();
+            SaveChanges();
         }
 
         public void Delete(int id)
@@ -56,6 +56,7 @@ namespace GameShop.DataAccess.Repositories.GameRepository
                 throw new Exception("Game not found");
             }
             _context.Games.Remove(game);
+            SaveChanges();
         }
     }
 }
