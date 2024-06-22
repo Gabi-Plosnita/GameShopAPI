@@ -1,10 +1,19 @@
-var builder = WebApplication.CreateBuilder(args);
+using GameShop.DataAccess.DataContext;
+using Microsoft.EntityFrameworkCore;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var config = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+builder.Services.AddDbContext<GameShopDbContext>(
+    options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
