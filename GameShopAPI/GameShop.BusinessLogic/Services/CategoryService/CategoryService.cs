@@ -36,8 +36,15 @@ namespace GameShop.BusinessLogic.Services
         }
         public void Create(CategoryRequestDto categoryDto)
         {
-            var category = categoryDto.ToCategory();
-            _categoryRepository.Create(category);
+            try
+            {
+                var category = categoryDto.ToCategory();
+                _categoryRepository.Create(category);
+            }
+            catch (CategoryAlreadyExistsException)
+            {
+                throw;
+            }
         }
         public void Update(int id, CategoryRequestDto updatedCategoryDto)
         {
@@ -48,6 +55,10 @@ namespace GameShop.BusinessLogic.Services
                 _categoryRepository.Update(id, category);
             }
             catch (CategoryNotFoundException)
+            {
+                throw;
+            }
+            catch (CategoryAlreadyExistsException)
             {
                 throw;
             }
