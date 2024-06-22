@@ -35,7 +35,10 @@ namespace GameShop.DataAccess.Repositories
 
         public User Get(int id)
         {
-            var user = _context.Users.Find(id);
+            var user = _context.Users
+                               .Where(u => u.UserId == id)
+                               .Include(u => u.Role)
+                               .FirstOrDefault();
             if (user == null)
             {
                 throw new UserNotFoundException($"User with ID {id} not found");
@@ -88,6 +91,7 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new UserNotFoundException($"User with ID {id} not found");
             }
+
             _context.Users.Remove(userToDelete);
             SaveChanges();
         }
