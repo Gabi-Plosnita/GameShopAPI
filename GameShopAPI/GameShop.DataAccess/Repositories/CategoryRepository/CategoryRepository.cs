@@ -1,5 +1,6 @@
 ﻿using GameShop.DataAccess.DataContext;
 using GameShop.EntityLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameShop.DataAccess.Repositories
 {
@@ -14,27 +15,42 @@ namespace GameShop.DataAccess.Repositories
 
         public Category GetById(int id)
         {
-            return _context.Categories.Find(id);
+            var category = _context.Categories.Find(id);
+            if (category == null)
+            {
+                throw new Exception("Category not found");
+            }
+            return category;
         }
 
         public void Create(Category category)
         {
             _context.Categories.Add(category);
-            _context.SaveChanges();
+            SaveChanges();
         }
 
         public void Update(int id, Category category)
         {
             var categoryToUpdate = _context.Categories.Find(id);
+            if (categoryToUpdate == null)
+            {
+                throw new Exception("Category not found");
+            }
             categoryToUpdate.Name = category.Name;
-            _context.SaveChanges();
+            SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var categoryToDelete = _context.Categories.Find(id);
+            var categoryToDelete = _context.Categories.Include(c => c.Games)
+                                                      .FirstOrDefault(c => c.CategoryId == id);
+            if (categoryToDelete == null)
+            {
+                throw new Exception("Category not found");
+            }
+            if()
             _context.Categories.Remove(categoryToDelete);
-            _context.SaveChanges();
+            SaveChanges();
         }
     }
 }
