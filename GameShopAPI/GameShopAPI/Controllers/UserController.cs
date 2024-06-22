@@ -25,6 +25,11 @@ namespace GameShop.API.Controllers
 
         public IActionResult Register([FromBody] UserRequestDto user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _userService.Register(user);
             return Created();
         }
@@ -37,8 +42,13 @@ namespace GameShop.API.Controllers
 
         public ActionResult<string> Login([FromBody] LoginRequestDto login)
         {
-             string token = _userService.Login(login);
-             return Ok(token);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            } 
+
+            string token = _userService.Login(login);
+            return Ok(token);
         }
 
         [HttpGet]
@@ -66,6 +76,11 @@ namespace GameShop.API.Controllers
 
         public IActionResult Update([FromRoute] int id, [FromBody] UserRequestDto updatedUser)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _userService.Update(id, updatedUser);
             return NoContent();
         }
