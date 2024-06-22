@@ -26,6 +26,10 @@ namespace GameShop.DataAccess.Repositories
 
         public void Create(Category category)
         {
+            if(_context.Categories.Any(c => c.Name == category.Name))
+            {
+                throw new CategoryAlreadyExistsException($"Category with name {category.Name} already exists");
+            }
             _context.Categories.Add(category);
             SaveChanges();
         }
@@ -36,6 +40,11 @@ namespace GameShop.DataAccess.Repositories
             if (categoryToUpdate == null)
             {
                 throw new CategoryNotFoundException($"Category with ID {id} not found");
+            }
+
+            if (_context.Categories.Any(c => c.Name == category.Name && c.CategoryId != id))
+            {
+                throw new CategoryAlreadyExistsException($"Category with name {category.Name} already exists");
             }
 
             categoryToUpdate.Name = category.Name;
