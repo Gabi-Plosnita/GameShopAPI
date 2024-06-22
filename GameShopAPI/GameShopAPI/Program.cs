@@ -1,8 +1,10 @@
 using GameShop.DataAccess.DataContext;
+using GameShop.BusinessLogic.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddBusinessServices();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
