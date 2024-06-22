@@ -78,6 +78,12 @@ namespace GameShop.DataAccess.Repositories
                 throw new RoleNotFoundException($"Role with ID {updatedUser.RoleId} not found");
             }
 
+            if (_context.Users.Any(u => u.Email == updatedUser.Email && u.UserId != id))
+            {
+                throw new UserAlreadyExistsException($"User with {updatedUser.Email} already exists");
+            }
+
+            userToUpdate.Username = updatedUser.Username;
             userToUpdate.Email = updatedUser.Email;
             userToUpdate.Password = updatedUser.Password;
             userToUpdate.RoleId = updatedUser.RoleId;
