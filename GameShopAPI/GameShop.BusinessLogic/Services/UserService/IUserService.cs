@@ -12,8 +12,6 @@ namespace GameShop.BusinessLogic.Services
 
         UserResponseDto Get(int id);
 
-        UserResponseDto GetByEmail(string email);
-
         void Update(int id, UserRequestDto updatedUserDto);
 
         void Delete(int id);

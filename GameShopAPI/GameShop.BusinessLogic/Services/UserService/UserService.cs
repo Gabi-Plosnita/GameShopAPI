@@ -35,19 +35,6 @@ namespace GameShop.BusinessLogic.Services
                 throw;
             }
         }
-        public UserResponseDto GetByEmail(string email)
-        {
-            try
-            {
-                var user = _userRepository.GetByEmail(email);
-                var userResponseDto = user.MapToUserResponseDto();
-                return userResponseDto;
-            }
-            catch (UserNotFoundException)
-            {
-                throw;
-            }
-        }
 
         public string Login(LoginRequestDto loginDto)
         {
