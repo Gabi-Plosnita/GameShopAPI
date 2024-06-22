@@ -1,6 +1,7 @@
 ﻿using GameShop.BusinessLogic.Mapping;
 using GameShop.DataAccess.Repositories;
 using GameShop.EntityLayer.Dtos;
+using GameShop.EntityLayer.Exceptions;
 
 namespace GameShop.BusinessLogic.Services
 {
@@ -22,26 +23,58 @@ namespace GameShop.BusinessLogic.Services
 
         public RoleResponseDto Get(int id)
         {
-            var role = _roleRepository.Get(id);
-            var roleResponseDto = role.MapToRoleResponseDto();
-            return roleResponseDto;
+            try
+            {
+                var role = _roleRepository.Get(id);
+                var roleResponseDto = role.MapToRoleResponseDto();
+                return roleResponseDto;
+            }
+            catch (RoleNotFoundException)
+            {
+                throw;
+            }
         }
 
         public void Create(RoleRequestDto roleRequestDto)
         {
-            var role = roleRequestDto.MapToRole();
-            _roleRepository.Create(role);
+            try
+            {
+                var role = roleRequestDto.MapToRole();
+                _roleRepository.Create(role);
+            }
+            catch (RoleAlreadyExistsException)
+            {
+                throw;
+            }
         }
 
         public void Update(int id, RoleRequestDto updatedRoleRequestDto)
         {
-            var updatedRole = updatedRoleRequestDto.MapToRole();
-            _roleRepository.Update(id, updatedRole);
+            try
+            {
+                var updatedRole = updatedRoleRequestDto.MapToRole();
+                _roleRepository.Update(id, updatedRole);
+            }
+            catch (RoleNotFoundException)
+            {
+                throw;
+            }
         }
 
         public void Delete(int id)
         {
-            _roleRepository.Delete(id);
+            try
+            {
+                _roleRepository.Delete(id);
+            }
+            catch (RoleNotFoundException)
+            {
+                throw;
+            }
+            catch (RoleDeleteException)
+            {
+                throw;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using GameShop.BusinessLogic.Mapping;
 using GameShop.DataAccess.Repositories;
 using GameShop.EntityLayer.Dtos;
+using GameShop.EntityLayer.Exceptions;
 
 namespace GameShop.BusinessLogic.Services
 {
@@ -25,7 +26,24 @@ namespace GameShop.BusinessLogic.Services
                 _userRepository.Register(user);
 
             }
-            catch (Exception e)
+            catch (UserAlreadyExistsException)
+            {
+                throw;
+            }
+            catch (RoleNotFoundException)
+            {
+                throw;
+            }
+        }
+        public UserResponseDto GetByEmail(string email)
+        {
+            try
+            {
+                var user = _userRepository.GetByEmail(email);
+                var userResponseDto = user.MapToUserResponseDto();
+                return userResponseDto;
+            }
+            catch (UserNotFoundException)
             {
                 throw;
             }
@@ -66,7 +84,7 @@ namespace GameShop.BusinessLogic.Services
                 var userResponseDto = user.MapToUserResponseDto();
                 return userResponseDto;
             }
-            catch (Exception e)
+            catch (UserNotFoundException)
             {
                 throw;
             }
@@ -79,7 +97,11 @@ namespace GameShop.BusinessLogic.Services
                 var updatedUserEntity = updatedUserDto.MapToUser();
                 _userRepository.Update(id, updatedUserEntity);
             }
-            catch (Exception e)
+            catch (UserNotFoundException)
+            {
+                throw;
+            }
+            catch (RoleNotFoundException)
             {
                 throw;
             }
@@ -91,7 +113,7 @@ namespace GameShop.BusinessLogic.Services
             {
                 _userRepository.Delete(id);
             }
-            catch (Exception e)
+            catch (UserNotFoundException)
             {
                 throw;
             }
