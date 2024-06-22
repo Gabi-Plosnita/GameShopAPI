@@ -59,6 +59,10 @@ namespace GameShop.BusinessLogic.Services
             {
                 throw;
             }
+            catch (RoleAlreadyExistsException)
+            {
+                throw;
+            }
         }
 
         public void Delete(int id)
