@@ -32,6 +32,11 @@ namespace GameShop.DataAccess.DataContext
                 .WithMany(c => c.Games)
                 .HasForeignKey(g => g.CategoryId);
 
+            // Users //
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Role)
+                .WithMany(r => r.Users)
+                .HasForeignKey(u => u.RoleId);
         }
     }
 }
