@@ -36,8 +36,15 @@ namespace GameShop.BusinessLogic.Services
 
         public void Create(GameCompanyRequestDto gameCompanyDto)
         {
-            var gameCompany = gameCompanyDto.ToGameCompany();
-            _gameCompanyRepository.Create(gameCompany);
+            try
+            {
+                var gameCompany = gameCompanyDto.ToGameCompany();
+                _gameCompanyRepository.Create(gameCompany);
+            }
+            catch (GameCompanyAlreadyExistsException)
+            {
+                throw;
+            }
         }
 
         public void Update(int id, GameCompanyRequestDto updatedGameCompanyDto)
@@ -49,6 +56,10 @@ namespace GameShop.BusinessLogic.Services
                 _gameCompanyRepository.Update(id, gameCompany);
             }
             catch (GameCompanyNotFoundException)
+            {
+                throw;
+            }
+            catch (GameCompanyAlreadyExistsException)
             {
                 throw;
             }
