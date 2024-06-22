@@ -28,6 +28,10 @@ namespace GameShop.DataAccess.Repositories
 
         public void Create(GameCompany gameCompany)
         {
+            if(_context.GameCompanies.Any(gc => gc.Name == gameCompany.Name))
+            {
+                throw new GameCompanyAlreadyExistsException($"Game company with name {gameCompany.Name} already exists");
+            }
             _context.GameCompanies.Add(gameCompany);
             SaveChanges();
         }
@@ -38,6 +42,11 @@ namespace GameShop.DataAccess.Repositories
             if(gameCompany == null) 
             {
                 throw new GameCompanyNotFoundException($"Game company with ID {id} not found");
+            }
+
+            if(_context.GameCompanies.Any(gc => gc.Name == updatedGameCompany.Name && gc.GameCompanyId != id))
+            {
+                throw new GameCompanyAlreadyExistsException($"Game company with name {updatedGameCompany.Name} already exists");
             }
 
             gameCompany.Name = updatedGameCompany.Name;
