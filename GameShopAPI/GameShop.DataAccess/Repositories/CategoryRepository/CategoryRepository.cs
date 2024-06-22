@@ -48,7 +48,11 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new Exception("Category not found");
             }
-            if()
+
+            if(categoryToDelete.Games.Count() != 0)
+            {
+                throw new Exception("Category has games");
+            }
             _context.Categories.Remove(categoryToDelete);
             SaveChanges();
         }
