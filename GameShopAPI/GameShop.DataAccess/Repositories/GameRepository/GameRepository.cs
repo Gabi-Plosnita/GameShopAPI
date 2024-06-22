@@ -34,6 +34,11 @@ namespace GameShop.DataAccess.Repositories
 
         public void Create(Game game)
         {
+            if (_context.Games.Any(g => g.Name == game.Name)) 
+            {
+                throw new GameAlreadyExistsException($"Game with name {game.Name} already exists");
+            }
+
             var category = _context.Categories.Find(game.CategoryId);
             if(category == null)
             {
@@ -70,8 +75,16 @@ namespace GameShop.DataAccess.Repositories
                 throw new GameCompanyNotFoundException($"Game Company with ID {updatedGame.GameCompanyId} not found");
             }
 
+            if (_context.Games.Any(g => g.Name == updatedGame.Name && g.GameId != id))
+            {
+                throw new GameAlreadyExistsException($"Game with name {updatedGame.Name} already exists");
+            }
+
             game.Name = updatedGame.Name;
             game.Price = updatedGame.Price;
+            game.CategoryId = updatedGame.CategoryId;
+            game.GameCompanyId = updatedGame.GameCompanyId;
+
             SaveChanges();
         }
 

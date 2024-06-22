@@ -28,7 +28,7 @@ namespace GameShop.BusinessLogic.Services
                 var categoryResponseDto = category.ToCategoryResponseDto();
                 return categoryResponseDto;
             }
-            catch (CategoryNotFoundException e)
+            catch (CategoryNotFoundException)
             {
                 throw;
             }
@@ -47,7 +47,7 @@ namespace GameShop.BusinessLogic.Services
                 category.CategoryId = id;
                 _categoryRepository.Update(id, category);
             }
-            catch (CategoryNotFoundException e)
+            catch (CategoryNotFoundException)
             {
                 throw;
             }
@@ -58,11 +58,11 @@ namespace GameShop.BusinessLogic.Services
             {
                 _categoryRepository.Delete(id);
             }
-            catch (CategoryNotFoundException e)
+            catch (CategoryNotFoundException)
             {
                 throw;
             }
-            catch (CategoryDeleteException e)
+            catch (CategoryDeleteException)
             {
                 throw;
             }
