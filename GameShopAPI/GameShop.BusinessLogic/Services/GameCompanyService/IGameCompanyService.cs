@@ -9,7 +9,7 @@ namespace GameShop.BusinessLogic.Services
 
         GameCompanyResponseDto GetById(int id);
 
-        void Add(GameCompanyRequestDto gameCompany);
+        void Create(GameCompanyRequestDto gameCompany);
 
         void Update(int id, GameCompanyRequestDto updatedGameCompany);
 

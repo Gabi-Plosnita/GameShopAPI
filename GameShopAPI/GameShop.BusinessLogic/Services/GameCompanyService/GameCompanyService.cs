@@ -26,10 +26,10 @@ namespace GameShop.BusinessLogic.Services.GameCompanyService
             return gameCompanyResponseDto;
         }
 
-        public void Add(GameCompanyRequestDto gameCompanyDto)
+        public void Create(GameCompanyRequestDto gameCompanyDto)
         {
             var gameCompany = gameCompanyDto.ToGameCompany();
-            _gameCompanyRepository.Add(gameCompany);
+            _gameCompanyRepository.Create(gameCompany);
         }
 
         public void Update(int id, GameCompanyRequestDto updatedGameCompanyDto)

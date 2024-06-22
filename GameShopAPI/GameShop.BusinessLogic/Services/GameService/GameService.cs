@@ -30,7 +30,7 @@ namespace GameShop.BusinessLogic.Services.GameService
         public void Create(GameRequestDto gameDto)
         {
             var game = gameDto.ToGame();
-            _gameRepository.Add(game);
+            _gameRepository.Create(game);
         }
 
         public void Update(int id, GameRequestDto updatedGameDto)
