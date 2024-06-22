@@ -37,6 +37,7 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new CategoryNotFoundException($"Category with ID {id} not found");
             }
+
             categoryToUpdate.Name = category.Name;
             SaveChanges();
         }
@@ -50,11 +51,12 @@ namespace GameShop.DataAccess.Repositories
                 throw new CategoryNotFoundException($"Category with ID {id} not found");
             }
 
-            if (categoryToDelete.Games.Count() != 0)
+            if (categoryToDelete.Games.Count() > 0)
             {
                 throw new CategoryDeleteException($"Cannot delete category {categoryToDelete.Name} because it has games on the market");
 
             }
+
             _context.Categories.Remove(categoryToDelete);
             SaveChanges();
         }
