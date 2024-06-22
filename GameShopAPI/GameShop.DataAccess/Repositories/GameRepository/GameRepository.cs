@@ -33,6 +33,18 @@ namespace GameShop.DataAccess.Repositories
 
         public void Create(Game game)
         {
+            var category = _context.Categories.Find(game.CategoryId);
+            if(category == null)
+            {
+                throw new CategoryNotFoundException($"Category with ID {game.CategoryId} not found");
+            }
+
+            var gameCompany = _context.GameCompanies.Find(game.GameCompanyId);
+            if(gameCompany == null)
+            {
+                throw new GameCompanyNotFoundException($"Game Company with ID {game.GameCompanyId} not found");
+            }
+
             _context.Games.Add(game);
             SaveChanges();
         }
@@ -44,6 +56,19 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new GameNotFoundException($"Game with ID {id} not found");
             }
+
+            var category = _context.Categories.Find(updatedGame.CategoryId);
+            if(category == null)
+            {
+                throw new CategoryNotFoundException($"Category with ID {updatedGame.CategoryId} not found");
+            }
+
+            var gameCompany = _context.GameCompanies.Find(updatedGame.GameCompanyId);
+            if(gameCompany == null)
+            {
+                throw new GameCompanyNotFoundException($"Game Company with ID {updatedGame.GameCompanyId} not found");
+            }
+
             game.Name = updatedGame.Name;
             game.Price = updatedGame.Price;
             SaveChanges();
