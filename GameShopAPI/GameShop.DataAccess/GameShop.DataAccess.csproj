@@ -19,4 +19,10 @@
     <ProjectReference Include="..\GameShop.EntityLayer\GameShop.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\GameCompanyRepository\" />
+    <Folder Include="Repositories\CategoryRepository\" />
+    <Folder Include="Repositories\GameRepository\" />
+  </ItemGroup>
+
 </Project>
