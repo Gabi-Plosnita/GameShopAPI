@@ -1,4 +1,4 @@
-﻿namespace GameShop.EntityLayer
+﻿namespace GameShop.EntityLayer.Entities
 {
     public class GameCompany
     {
