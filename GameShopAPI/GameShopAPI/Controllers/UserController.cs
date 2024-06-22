@@ -20,17 +20,20 @@ namespace GameShop.API.Controllers
         [HttpPost("/register")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
 
         public IActionResult Register([FromBody] UserRequestDto user)
         {
             _userService.Register(user);
-            return Created("User created", user);
+            return Created();
         }
 
         [AllowAnonymous]
         [HttpPost("/login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
 
         public ActionResult<string> Login([FromBody] LoginRequestDto login)
         {
@@ -59,6 +62,7 @@ namespace GameShop.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
 
         public IActionResult Update([FromRoute] int id, [FromBody] UserRequestDto updatedUser)
         {
@@ -69,7 +73,6 @@ namespace GameShop.API.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
 
         public IActionResult Delete([FromRoute] int id)
         {
