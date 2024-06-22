@@ -23,5 +23,15 @@ namespace GameShop.BusinessLogic.Mapping
             };  
             return category;
         }
+
+        public static List<CategoryResponseDto> ToListCategoryResponseDto(this List<Category> categories)
+        {
+            var categoryResponseDtos = new List<CategoryResponseDto>();
+            foreach (var category in categories)
+            {
+                categoryResponseDtos.Add(category.ToCategoryResponseDto());
+            }
+            return categoryResponseDtos;
+        }
     }
 }
