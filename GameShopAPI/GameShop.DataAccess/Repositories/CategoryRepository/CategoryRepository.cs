@@ -1,5 +1,6 @@
 ﻿using GameShop.DataAccess.DataContext;
 using GameShop.EntityLayer.Entities;
+using GameShop.EntityLayer.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameShop.DataAccess.Repositories
@@ -18,7 +19,7 @@ namespace GameShop.DataAccess.Repositories
             var category = _context.Categories.Find(id);
             if (category == null)
             {
-                throw new Exception("Category not found");
+                throw new CategoryNotFoundException($"Category with ID {id} not found");
             }
             return category;
         }
@@ -34,7 +35,7 @@ namespace GameShop.DataAccess.Repositories
             var categoryToUpdate = _context.Categories.Find(id);
             if (categoryToUpdate == null)
             {
-                throw new Exception("Category not found");
+                throw new CategoryNotFoundException($"Category with ID {id} not found");
             }
             categoryToUpdate.Name = category.Name;
             SaveChanges();
@@ -46,12 +47,13 @@ namespace GameShop.DataAccess.Repositories
                                                       .FirstOrDefault(c => c.CategoryId == id);
             if (categoryToDelete == null)
             {
-                throw new Exception("Category not found");
+                throw new CategoryNotFoundException($"Category with ID {id} not found");
             }
 
-            if(categoryToDelete.Games.Count() != 0)
+            if (categoryToDelete.Games.Count() != 0)
             {
-                throw new Exception("Category has games");
+                throw new CategoryDeleteException($"Cannot delete category {categoryToDelete.Name} because it has games on the market");
+
             }
             _context.Categories.Remove(categoryToDelete);
             SaveChanges();

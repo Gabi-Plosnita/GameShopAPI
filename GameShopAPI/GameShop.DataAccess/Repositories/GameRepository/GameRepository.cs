@@ -1,5 +1,6 @@
 ﻿using GameShop.DataAccess.DataContext;
 using GameShop.EntityLayer.Entities;
+using GameShop.EntityLayer.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameShop.DataAccess.Repositories
@@ -25,7 +26,7 @@ namespace GameShop.DataAccess.Repositories
                                      .FirstOrDefault(g => g.GameId == id);
             if(game == null)
             {
-                throw new Exception("Game not found");
+                throw new GameNotFoundException($"Game with ID {id} not found");
             }
             return game;
         }
@@ -41,7 +42,7 @@ namespace GameShop.DataAccess.Repositories
             var game = _context.Games.Find(id);
             if(game == null) 
             {
-                throw new Exception("Game not found");
+                throw new GameNotFoundException($"Game with ID {id} not found");
             }
             game.Name = updatedGame.Name;
             game.Price = updatedGame.Price;
@@ -53,7 +54,7 @@ namespace GameShop.DataAccess.Repositories
             var game = _context.Games.Find(id);
             if(game == null)
             {
-                throw new Exception("Game not found");
+                throw new GameNotFoundException($"Game with ID {id} not found");
             }
             _context.Games.Remove(game);
             SaveChanges();

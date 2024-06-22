@@ -1,5 +1,6 @@
 ﻿using GameShop.DataAccess.DataContext;
 using GameShop.EntityLayer.Entities;
+using GameShop.EntityLayer.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameShop.DataAccess.Repositories
@@ -20,7 +21,7 @@ namespace GameShop.DataAccess.Repositories
             var gameCompany = _context.GameCompanies.Find(id);
             if(gameCompany == null)
             {
-                throw new Exception("Game company not found");
+                throw new GameCompanyNotFoundException($"Game company with ID {id} not found");
             }
             return gameCompany;
         }
@@ -36,7 +37,7 @@ namespace GameShop.DataAccess.Repositories
             var gameCompany = _context.GameCompanies.Find(id);
             if(gameCompany == null) 
             {
-                throw new Exception("Game company not found");
+                throw new GameCompanyNotFoundException($"Game company with ID {id} not found");
             }
             gameCompany.Name = updatedGameCompany.Name;
             gameCompany.Email = updatedGameCompany.Email;
@@ -49,11 +50,11 @@ namespace GameShop.DataAccess.Repositories
                                                     .FirstOrDefault(gc => gc.GameCompanyId == id);
             if(gameCompany == null)
             {
-                throw new Exception("Game company not found");
+                throw new GameCompanyNotFoundException($"Game company with ID {id} not found");
             }
-            if(gameCompany.Games.Count > 0)
+            if (gameCompany.Games.Count > 0)
             {
-                throw new Exception("Cannot delete game company with games");
+                throw new CompanyDeleteException($"Cannot delete game company {gameCompany.Name} because it has games on the market");
             }
 
             _context.GameCompanies.Remove(gameCompany);
