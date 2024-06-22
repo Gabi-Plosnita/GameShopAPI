@@ -2,7 +2,7 @@
 using GameShop.DataAccess.Repositories;
 using GameShop.EntityLayer.Dtos;
 
-namespace GameShop.BusinessLogic.Services.RoleService
+namespace GameShop.BusinessLogic.Services
 {
     public class RoleService : IRoleService
     {
@@ -16,14 +16,32 @@ namespace GameShop.BusinessLogic.Services.RoleService
         public List<RoleResponseDto> GetAll()
         {
             var roles = _roleRepository.GetAll();
-            var rolesDtos = roles.MapToRoleResponseDtos();
-            return rolesDtos;
+            var roleResponseDtos = roles.MapToRoleResponseDtos();
+            return roleResponseDtos;
         }
 
-        public void Create(RoleRequestDto roleDto)
+        public RoleResponseDto Get(int id)
         {
-            var role = roleDto.MapToRole();
+            var role = _roleRepository.Get(id);
+            var roleResponseDto = role.MapToRoleResponseDto();
+            return roleResponseDto;
+        }
+
+        public void Create(RoleRequestDto roleRequestDto)
+        {
+            var role = roleRequestDto.MapToRole();
             _roleRepository.Create(role);
+        }
+
+        public void Update(int id, RoleRequestDto updatedRoleRequestDto)
+        {
+            var updatedRole = updatedRoleRequestDto.MapToRole();
+            _roleRepository.Update(id, updatedRole);
+        }
+
+        public void Delete(int id)
+        {
+            _roleRepository.Delete(id);
         }
     }
 }
