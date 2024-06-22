@@ -39,6 +39,7 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new GameCompanyNotFoundException($"Game company with ID {id} not found");
             }
+
             gameCompany.Name = updatedGameCompany.Name;
             gameCompany.Email = updatedGameCompany.Email;
             SaveChanges();
@@ -52,6 +53,7 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new GameCompanyNotFoundException($"Game company with ID {id} not found");
             }
+
             if (gameCompany.Games.Count > 0)
             {
                 throw new CompanyDeleteException($"Cannot delete game company {gameCompany.Name} because it has games on the market");
