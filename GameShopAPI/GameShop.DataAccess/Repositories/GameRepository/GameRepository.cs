@@ -28,6 +28,7 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new GameNotFoundException($"Game with ID {id} not found");
             }
+
             return game;
         }
 
@@ -81,6 +82,7 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new GameNotFoundException($"Game with ID {id} not found");
             }
+
             _context.Games.Remove(game);
             SaveChanges();
         }
