@@ -8,7 +8,7 @@ namespace GameShop.DataAccess.Repositories
 
         GameCompany GetById(int id);
 
-        void Add(GameCompany gameCompany);
+        void Create(GameCompany gameCompany);
 
         void Update(int id, GameCompany updatedGameCompany);
 

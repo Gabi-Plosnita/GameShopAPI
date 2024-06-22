@@ -30,7 +30,7 @@ namespace GameShop.DataAccess.Repositories.GameRepository
             return game;
         }
 
-        public void Add(Game game)
+        public void Create(Game game)
         {
             _context.Games.Add(game);
             SaveChanges();

@@ -25,7 +25,7 @@ namespace GameShop.DataAccess.Repositories.GameCompanyRepository
             return gameCompany;
         }
 
-        public void Add(GameCompany gameCompany)
+        public void Create(GameCompany gameCompany)
         {
             _context.GameCompanies.Add(gameCompany);
             SaveChanges();
