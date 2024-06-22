@@ -96,6 +96,10 @@ namespace GameShop.BusinessLogic.Services
             {
                 throw;
             }
+            catch (UserAlreadyExistsException)
+            {
+                throw;
+            }
         }
 
         public void Delete(int id)
