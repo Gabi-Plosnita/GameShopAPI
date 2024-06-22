@@ -27,7 +27,7 @@ namespace GameShop.BusinessLogic.Services.GameService
             return gameResponseDto;
         }
 
-        public void Add(GameRequestDto gameDto)
+        public void Create(GameRequestDto gameDto)
         {
             var game = gameDto.ToGame();
             _gameRepository.Add(game);
