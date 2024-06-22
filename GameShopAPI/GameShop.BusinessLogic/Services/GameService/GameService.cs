@@ -1,6 +1,7 @@
 ﻿using GameShop.BusinessLogic.Mapping;
 using GameShop.DataAccess.Repositories;
 using GameShop.EntityLayer.Dtos;
+using GameShop.EntityLayer.Exceptions;
 
 namespace GameShop.BusinessLogic.Services
 {
@@ -22,27 +23,67 @@ namespace GameShop.BusinessLogic.Services
 
         public GameResponseDto GetById(int id)
         {
-            var game = _gameRepository.GetById(id);
-            var gameResponseDto = game.ToGameResponseDto();
-            return gameResponseDto;
+            try
+            {
+                var game = _gameRepository.GetById(id);
+                var gameResponseDto = game.ToGameResponseDto();
+                return gameResponseDto;
+            }
+            catch (GameNotFoundException)
+            {
+                throw;
+            }
         }
 
         public void Create(GameRequestDto gameDto)
         {
-            var game = gameDto.ToGame();
-            _gameRepository.Create(game);
+            try
+            {
+                var game = gameDto.ToGame();
+                _gameRepository.Create(game);
+            }
+            catch (CategoryNotFoundException)
+            {
+                throw;
+            }
+            catch (GameCompanyNotFoundException)
+            {
+                throw;
+            }
         }
 
         public void Update(int id, GameRequestDto updatedGameDto)
         {
-            var game = updatedGameDto.ToGame();
-            game.GameId = id;
-            _gameRepository.Update(id, game);
+            try
+            {
+                var game = updatedGameDto.ToGame();
+                game.GameId = id;
+                _gameRepository.Update(id, game);
+            }
+            catch (GameNotFoundException)
+            {
+                throw;
+            }
+            catch (CategoryNotFoundException)
+            {
+                throw;
+            }
+            catch (GameCompanyNotFoundException)
+            {
+                throw;
+            }
         }
 
         public void Delete(int id)
         {
-            _gameRepository.Delete(id);
+            try
+            {
+                _gameRepository.Delete(id);
+            }
+            catch (GameNotFoundException)
+            {
+                throw;
+            }
         }
     }
 }
