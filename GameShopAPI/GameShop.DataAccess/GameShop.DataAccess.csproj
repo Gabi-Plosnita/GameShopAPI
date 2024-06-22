@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GameShop.EntityLayer\GameShop.EntityLayer.csproj" />
+  </ItemGroup>
+
 </Project>

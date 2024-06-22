@@ -18,4 +18,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GameShop.BusinessLogic\GameShop.BusinessLogic.csproj" />
+    <ProjectReference Include="..\GameShop.EntityLayer\GameShop.EntityLayer.csproj" />
+  </ItemGroup>
+
 </Project>

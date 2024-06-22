@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GameShop.DataAccess\GameShop.DataAccess.csproj" />
+    <ProjectReference Include="..\GameShop.EntityLayer\GameShop.EntityLayer.csproj" />
+  </ItemGroup>
+
 </Project>
