@@ -41,6 +41,11 @@ namespace GameShop.API.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult Create([FromBody] GameCompanyRequestDto gameCompanyDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _gameCompanyService.Create(gameCompanyDto);
             return Created();
         }
@@ -53,6 +58,11 @@ namespace GameShop.API.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult Update([FromRoute] int id, [FromBody] GameCompanyRequestDto updatedGameCompanyDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _gameCompanyService.Update(id, updatedGameCompanyDto);
             return NoContent();
         }
