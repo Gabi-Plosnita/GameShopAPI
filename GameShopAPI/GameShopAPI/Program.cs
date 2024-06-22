@@ -1,21 +1,23 @@
-using GameShop.DataAccess.DataContext;
 using GameShop.BusinessLogic.Extensions;
+using GameShop.DataAccess.DataContext;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddBusinessServices();
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+// Configure Services and DbContext //
 var config = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json")
     .Build();
 
-builder.Services.AddDbContext<GameShopDbContext>(
-    options => options.UseSqlServer(config.GetConnectionString("DatabaseConnection")));
+var connectionString = config.GetConnectionString("DatabaseConnection");
+builder.Services.ConfigureDbContext(connectionString);
+builder.Services.AddBusinessServices();
+
+// Add services to the container.
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
