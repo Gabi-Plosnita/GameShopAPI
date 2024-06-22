@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace GameShop.BusinessLogic.Services.AuthenticationService
+namespace GameShop.BusinessLogic.Services
 {
     public class AuthenticationService : IAuthenticationService
     {

@@ -1,6 +1,6 @@
 ﻿using GameShop.EntityLayer.Entities;
 
-namespace GameShop.BusinessLogic.Services.AuthenticationService
+namespace GameShop.BusinessLogic.Services
 {
     public interface IAuthenticationService
     {
