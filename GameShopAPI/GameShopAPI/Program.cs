@@ -1,3 +1,4 @@
+using GameShop.API.Middleware;
 using GameShop.BusinessLogic.Extensions;
 using GameShop.DataAccess.DataContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -85,6 +86,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
 
