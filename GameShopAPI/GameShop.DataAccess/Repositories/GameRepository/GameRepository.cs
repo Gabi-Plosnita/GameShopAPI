@@ -2,7 +2,7 @@
 using GameShop.EntityLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameShop.DataAccess.Repositories.GameRepository
+namespace GameShop.DataAccess.Repositories
 {
     public class GameRepository : BaseRepository, IGameRepository
     {

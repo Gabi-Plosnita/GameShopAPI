@@ -2,7 +2,7 @@
 using GameShop.DataAccess.Repositories;
 using GameShop.EntityLayer.Dtos;
 
-namespace GameShop.BusinessLogic.Services.GameCompanyService
+namespace GameShop.BusinessLogic.Services
 {
     public class GameCompanyService : IGameCompanyService
     {
