@@ -46,6 +46,11 @@ namespace GameShop.DataAccess.Repositories
                 throw new RoleNotFoundException($"Role with ID {id} not found");
             }
 
+            if (_context.Roles.Any(r => r.Name == updatedRole.Name && r.RoleId != id))
+            {
+                throw new RoleAlreadyExistsException($"Role {updatedRole} already exists");
+            }
+
             roleToUpdate.Name = updatedRole.Name;
             SaveChanges();
         }
