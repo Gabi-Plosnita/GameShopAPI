@@ -31,7 +31,7 @@ namespace GameShop.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<CategoryResponseDto> GetById([FromRoute] int id)
         {
-            return _categoryService.GetById(id);
+            return Ok(_categoryService.GetById(id));
         }
 
 
