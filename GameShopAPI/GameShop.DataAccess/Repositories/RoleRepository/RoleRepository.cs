@@ -1,6 +1,7 @@
 ﻿using GameShop.DataAccess.DataContext;
 using GameShop.EntityLayer.Entities;
 using GameShop.EntityLayer.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameShop.DataAccess.Repositories
 {
@@ -22,6 +23,7 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new RoleNotFoundException($"Role with ID {id} not found");
             }
+
             return role;
         }
 
@@ -31,6 +33,7 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new RoleAlreadyExistsException($"Role {role} already exists");
             }
+
             _context.Roles.Add(role);
             SaveChanges();
         }
@@ -42,17 +45,25 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new RoleNotFoundException($"Role with ID {id} not found");
             }
+
             roleToUpdate.Name = updatedRole.Name;
             SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var roleToDelete = _context.Roles.Find(id);
+            var roleToDelete = _context.Roles.Include(r => r.Users)
+                                             .FirstOrDefault(r => r.RoleId == id);
             if (roleToDelete == null)
             {
                 throw new RoleNotFoundException($"Role with ID {id} not found");
             }
+
+            if (roleToDelete.Users.Count() > 0)
+            {
+                throw new RoleDeleteException($"Role with ID {id} has users");
+            }
+
             _context.Roles.Remove(roleToDelete);
             SaveChanges();
         }
