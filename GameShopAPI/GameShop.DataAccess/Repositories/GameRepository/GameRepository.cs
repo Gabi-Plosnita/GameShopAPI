@@ -34,6 +34,11 @@ namespace GameShop.DataAccess.Repositories
 
         public void Create(Game game)
         {
+            if (_context.Games.Any(g => g.Name == game.Name)) 
+            {
+                throw new GameAlreadyExistsException($"Game with name {game.Name} already exists");
+            }
+
             var category = _context.Categories.Find(game.CategoryId);
             if(category == null)
             {

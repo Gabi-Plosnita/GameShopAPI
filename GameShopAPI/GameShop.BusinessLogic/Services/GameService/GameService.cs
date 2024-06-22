@@ -42,6 +42,10 @@ namespace GameShop.BusinessLogic.Services
                 var game = gameDto.ToGame();
                 _gameRepository.Create(game);
             }
+            catch (GameAlreadyExistsException)
+            {
+                throw;
+            }
             catch (CategoryNotFoundException)
             {
                 throw;
