@@ -34,17 +34,19 @@ namespace GameShop.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
 
         public IActionResult CreateRole([FromBody] RoleRequestDto role)
         {
             _roleService.Create(role);
-            return Created("Role created", role);
+            return Created();
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         
         public IActionResult UpdateRole([FromRoute] int id, [FromBody] RoleRequestDto updatedRole)
         {
