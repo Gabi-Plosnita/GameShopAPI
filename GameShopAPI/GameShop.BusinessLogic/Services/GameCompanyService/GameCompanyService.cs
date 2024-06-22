@@ -1,6 +1,7 @@
 ﻿using GameShop.BusinessLogic.Mapping;
 using GameShop.DataAccess.Repositories;
 using GameShop.EntityLayer.Dtos;
+using GameShop.EntityLayer.Exceptions;
 
 namespace GameShop.BusinessLogic.Services
 {
@@ -21,9 +22,16 @@ namespace GameShop.BusinessLogic.Services
 
         public GameCompanyResponseDto GetById(int id)
         {
-            var gameCompany = _gameCompanyRepository.GetById(id);
-            var gameCompanyResponseDto = gameCompany.ToGameCompanyResponseDto();
-            return gameCompanyResponseDto;
+            try
+            {
+                var gameCompany = _gameCompanyRepository.GetById(id);
+                var gameCompanyResponseDto = gameCompany.ToGameCompanyResponseDto();
+                return gameCompanyResponseDto;
+            }
+            catch (GameCompanyNotFoundException)
+            {
+                throw;
+            }
         }
 
         public void Create(GameCompanyRequestDto gameCompanyDto)
@@ -34,13 +42,31 @@ namespace GameShop.BusinessLogic.Services
 
         public void Update(int id, GameCompanyRequestDto updatedGameCompanyDto)
         {
-            var gameCompany = updatedGameCompanyDto.ToGameCompany();
-            gameCompany.GameCompanyId = id;
-            _gameCompanyRepository.Update(id, gameCompany);
+            try
+            {
+                var gameCompany = updatedGameCompanyDto.ToGameCompany();
+                gameCompany.GameCompanyId = id;
+                _gameCompanyRepository.Update(id, gameCompany);
+            }
+            catch (GameCompanyNotFoundException)
+            {
+                throw;
+            }
         }
-        public void Delete(int id) 
+        public void Delete(int id)
         {
-            _gameCompanyRepository.Delete(id);
+            try
+            {
+                _gameCompanyRepository.Delete(id);
+            }
+            catch (GameCompanyNotFoundException)
+            {
+                throw;
+            }
+            catch (CompanyDeleteException)
+            {
+                throw;
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using GameShop.BusinessLogic.Mapping;
 using GameShop.DataAccess.Repositories;
 using GameShop.EntityLayer.Dtos;
+using GameShop.EntityLayer.Exceptions;
 
 namespace GameShop.BusinessLogic.Services
 {
@@ -19,11 +20,19 @@ namespace GameShop.BusinessLogic.Services
             var categoryResponseDtos = categories.ToListCategoryResponseDto();
             return categoryResponseDtos;
         }
-        public  CategoryResponseDto GetById(int id)
+        public CategoryResponseDto GetById(int id)
         {
-            var category = _categoryRepository.GetById(id);
-            var categoryResponseDto = category.ToCategoryResponseDto();
-            return categoryResponseDto;
+            try
+            { 
+                var category = _categoryRepository.GetById(id);
+                var categoryResponseDto = category.ToCategoryResponseDto();
+                return categoryResponseDto;
+            }
+            catch (CategoryNotFoundException e)
+            {
+                throw;
+            }
+           
         }
         public void Create(CategoryRequestDto categoryDto)
         {
@@ -32,13 +41,31 @@ namespace GameShop.BusinessLogic.Services
         }
         public void Update(int id, CategoryRequestDto updatedCategoryDto)
         {
-            var category = updatedCategoryDto.ToCategory();
-            category.CategoryId = id;
-            _categoryRepository.Update(id, category);
+            try
+            {
+                var category = updatedCategoryDto.ToCategory();
+                category.CategoryId = id;
+                _categoryRepository.Update(id, category);
+            }
+            catch (CategoryNotFoundException e)
+            {
+                throw;
+            }
         }
         public void Delete(int id)
         {
-            _categoryRepository.Delete(id);
+            try
+            {
+                _categoryRepository.Delete(id);
+            }
+            catch (CategoryNotFoundException e)
+            {
+                throw;
+            }
+            catch (CategoryDeleteException e)
+            {
+                throw;
+            }
         }
     }
 }
