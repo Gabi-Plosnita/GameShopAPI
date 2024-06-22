@@ -13,7 +13,7 @@ var config = new ConfigurationBuilder()
     .Build();
 
 builder.Services.AddDbContext<GameShopDbContext>(
-    options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+    options => options.UseSqlServer(config.GetConnectionString("DatabaseConnection")));
 
 var app = builder.Build();
 
