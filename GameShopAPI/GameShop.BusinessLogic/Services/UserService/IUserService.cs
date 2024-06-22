@@ -1,6 +1,6 @@
 ﻿using GameShop.EntityLayer.Dtos;
 
-namespace GameShop.BusinessLogic.Services.UserService
+namespace GameShop.BusinessLogic.Services
 {
     public interface IUserService
     {

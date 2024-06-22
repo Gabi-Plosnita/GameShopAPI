@@ -1,9 +1,11 @@
 ﻿using GameShop.BusinessLogic.Services;
 using GameShop.EntityLayer.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameShop.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/Games")]
     public class GamesController : ControllerBase
     {
@@ -14,12 +16,15 @@ namespace GameShop.API.Controllers
             _gameService = gameService;
         }
 
+
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public List<GameResponseDto> GetAll()
         {
             return _gameService.GetAll();
         }
+
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -29,6 +34,7 @@ namespace GameShop.API.Controllers
            return _gameService.GetById(id);
         }
 
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -36,6 +42,7 @@ namespace GameShop.API.Controllers
         {
             _gameService.Create(gameDto);
         }
+
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -45,6 +52,7 @@ namespace GameShop.API.Controllers
         {
             _gameService.Update(id, updatedGameDto);
         }
+
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

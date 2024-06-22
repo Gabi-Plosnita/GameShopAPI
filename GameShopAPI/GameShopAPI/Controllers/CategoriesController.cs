@@ -1,9 +1,11 @@
 ﻿using GameShop.BusinessLogic.Services;
 using GameShop.EntityLayer.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameShop.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/Categories")]
     public class CategoriesController : ControllerBase
     {
@@ -14,12 +16,16 @@ namespace GameShop.API.Controllers
             _categoryService = categoryService;
         }
 
+
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public List<CategoryResponseDto> GetAll()
         {
             return _categoryService.GetAll();
         }
+
+
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -27,6 +33,8 @@ namespace GameShop.API.Controllers
         {
             return _categoryService.GetById(id);
         }
+
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -34,6 +42,8 @@ namespace GameShop.API.Controllers
         {
             _categoryService.Create(categoryDto);
         }
+
+
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -42,6 +52,7 @@ namespace GameShop.API.Controllers
         {
             _categoryService.Update(id, updatedCategoryDto);
         }
+
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
