@@ -12,7 +12,10 @@ namespace GameShop.DataAccess.Repositories
 
         public List<User> GetAll()
         {
-            return _context.Users.ToList();
+            var users = _context.Users
+                                .Include(u => u.Role)
+                                .ToList();
+            return users;
         }
 
         public User GetUserByEmail(string email)
