@@ -38,6 +38,11 @@ namespace GameShop.API.Controllers
 
         public IActionResult CreateRole([FromBody] RoleRequestDto role)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _roleService.Create(role);
             return Created();
         }
@@ -50,6 +55,11 @@ namespace GameShop.API.Controllers
         
         public IActionResult UpdateRole([FromRoute] int id, [FromBody] RoleRequestDto updatedRole)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _roleService.Update(id, updatedRole);
             return NoContent();
         }
