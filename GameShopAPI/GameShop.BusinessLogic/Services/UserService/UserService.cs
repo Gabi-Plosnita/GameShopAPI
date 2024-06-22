@@ -44,15 +44,19 @@ namespace GameShop.BusinessLogic.Services
 
                 if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
                 {
-                    throw new Exception("Invalid password");
+                    throw new InvalidPasswordException("Invalid password");
                 }
 
                 string token = _authenticationService.GenerateToken(user);
                 return token;
             }
-            catch (Exception e)
+            catch (UserNotFoundException)
             {
-                throw new Exception(e.Message);
+                throw;
+            }
+            catch (InvalidPasswordException)
+            {
+                throw;
             }
         }
 
@@ -89,6 +93,10 @@ namespace GameShop.BusinessLogic.Services
                 throw;
             }
             catch (RoleNotFoundException)
+            {
+                throw;
+            }
+            catch (UserAlreadyExistsException)
             {
                 throw;
             }
