@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShopAPI", "GameShopAPI\GameShopAPI.csproj", "{B388FBFF-19E5-40D3-8D4A-22DA6F36BF8E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.API", "GameShopAPI\GameShop.API.csproj", "{B388FBFF-19E5-40D3-8D4A-22DA6F36BF8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.DataAccess", "GameShop.DataAccess\GameShop.DataAccess.csproj", "{0B227EA6-2820-441D-9655-ADAB8D4AE37F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.BusinessLogic", "GameShop.BusinessLogic\GameShop.BusinessLogic.csproj", "{1F14A2C9-A0E2-4582-A859-C3AF9C19A776}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.EntityLayer", "GameShop.EntityLayer\GameShop.EntityLayer.csproj", "{2B78FCD4-3C27-4C60-AE82-0C7158E4A31A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{B388FBFF-19E5-40D3-8D4A-22DA6F36BF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B388FBFF-19E5-40D3-8D4A-22DA6F36BF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B388FBFF-19E5-40D3-8D4A-22DA6F36BF8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B227EA6-2820-441D-9655-ADAB8D4AE37F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B227EA6-2820-441D-9655-ADAB8D4AE37F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B227EA6-2820-441D-9655-ADAB8D4AE37F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B227EA6-2820-441D-9655-ADAB8D4AE37F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F14A2C9-A0E2-4582-A859-C3AF9C19A776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F14A2C9-A0E2-4582-A859-C3AF9C19A776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F14A2C9-A0E2-4582-A859-C3AF9C19A776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F14A2C9-A0E2-4582-A859-C3AF9C19A776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B78FCD4-3C27-4C60-AE82-0C7158E4A31A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B78FCD4-3C27-4C60-AE82-0C7158E4A31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B78FCD4-3C27-4C60-AE82-0C7158E4A31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B78FCD4-3C27-4C60-AE82-0C7158E4A31A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
