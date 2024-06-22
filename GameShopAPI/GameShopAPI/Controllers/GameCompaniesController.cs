@@ -38,6 +38,7 @@ namespace GameShop.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public void Create([FromBody] GameCompanyRequestDto gameCompanyDto)
         {
             _gameCompanyService.Create(gameCompanyDto);
@@ -48,6 +49,7 @@ namespace GameShop.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public void Update([FromRoute] int id, [FromBody] GameCompanyRequestDto updatedGameCompanyDto)
         {
             _gameCompanyService.Update(id, updatedGameCompanyDto);
