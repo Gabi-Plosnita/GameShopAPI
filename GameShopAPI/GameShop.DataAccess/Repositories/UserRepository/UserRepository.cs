@@ -50,6 +50,13 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new UserAlreadyExistsException($"User with {user.Email} already exists");
             }
+
+            var role = _context.Roles.Find(user.RoleId);
+            if (role == null)
+            {
+                throw new RoleNotFoundException($"Role with ID {user.RoleId} not found");
+            }
+
             _context.Add(user);
             SaveChanges();
         }
@@ -61,6 +68,13 @@ namespace GameShop.DataAccess.Repositories
             {
                 throw new UserNotFoundException($"User with ID {id} not found");
             }
+
+            var role = _context.Roles.Find(updatedUser.RoleId);
+            if (role == null)
+            {
+                throw new RoleNotFoundException($"Role with ID {updatedUser.RoleId} not found");
+            }
+
             userToUpdate.Email = updatedUser.Email;
             userToUpdate.Password = updatedUser.Password;
             userToUpdate.RoleId = updatedUser.RoleId;
