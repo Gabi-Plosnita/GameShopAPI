@@ -16,6 +16,7 @@ namespace GameShop.API.Controllers
             _categoryService = categoryService;
         }
 
+
         [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -51,6 +52,7 @@ namespace GameShop.API.Controllers
         {
             _categoryService.Update(id, updatedCategoryDto);
         }
+
 
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
