@@ -209,4 +209,4 @@ The GameShop API was developed as part of a comprehensive system to manage an on
 
 ## GitHub Link
 The source code for the GameShop API is available on GitHub at the following link:
-[[GitHub Repository](https://github.com/your-repository-link)](https://github.com/Gabi-Plosnita/GameShopAPI.git)
+(https://github.com/your-repository-link)](https://github.com/Gabi-Plosnita/GameShopAPI.git)
