@@ -73,7 +73,7 @@ namespace GameShop.API.Controllers
         //204NoContent is returned if the request is successful
         //400BadRequest is returned if the request is invalid
         //401Unauthorized is returned if the user is not authorized
-        //404NotFound is returned if the game is not found
+        //404NotFound is returned if the game is not found or the category or game company is not found
         //409Conflict is returned if the game already exists
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
