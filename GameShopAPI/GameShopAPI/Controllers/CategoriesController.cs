@@ -17,7 +17,7 @@ namespace GameShop.API.Controllers
         }
 
         //Returns all categories
-        //Can be accessed by anyone
+        //Anyone can access this endpoint
         //200Ok is returned if the request is successful
         [AllowAnonymous]
         [HttpGet]
@@ -28,7 +28,7 @@ namespace GameShop.API.Controllers
         }
 
         //Returns a category by id
-        //Can't be accessed by anyone
+        //Only Admins can access this endpoint
         //200Ok is returned if the request is successful
         //401Unauthorized is returned if the user is not authorized
         //404NotFound is returned if the category is not found
@@ -42,8 +42,8 @@ namespace GameShop.API.Controllers
         }
 
         //Creates a new category
-        //Can't be accessed by anyone
-        //201Created is returned if the request is successful
+        //Only Admins can access this endpoint
+        //200Ok is returned if the request is successful
         //400BadRequest is returned if the request is invalid
         //401Unauthorized is returned if the user is not authorized
         //409Conflict is returned if the category already exists
@@ -60,11 +60,12 @@ namespace GameShop.API.Controllers
             }
 
             _categoryService.Create(categoryDto);
-            return Created();
+
+            return Ok();
         }
 
         //Updates a category by id
-        //Can't be accessed by anyone
+        //Only Admins can access this endpoint
         //204NoContent is returned if the request is successful
         //400BadRequest is returned if the request is invalid
         //401Unauthorized is returned if the user is not authorized
