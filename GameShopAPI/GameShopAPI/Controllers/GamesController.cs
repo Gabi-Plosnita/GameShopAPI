@@ -17,6 +17,9 @@ namespace GameShop.API.Controllers
         }
 
 
+        //Returns all games
+        //Can be accessed by anyone
+        //200Ok is returned if the request is successful
         [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -26,6 +29,11 @@ namespace GameShop.API.Controllers
         }
 
 
+        //Returns a game by id
+        //Only admins can access this endpoint
+        //200Ok is returned if the request is successful
+        //401Unauthorized is returned if the user is not authorized
+        //404NotFound is returned if the game is not found
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -35,8 +43,15 @@ namespace GameShop.API.Controllers
            return Ok(_gameService.GetById(id));
         }
 
+
+        //Creates a new game
+        //Only admins can access this endpoint
+        //200Ok is returned if the request is successful
+        //400BadRequest is returned if the request is invalid
+        //401Unauthorized is returned if the user is not authorized
+        //409Conflict is returned if the game already exists
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -49,10 +64,17 @@ namespace GameShop.API.Controllers
             }
 
             _gameService.Create(gameDto);
-            return Created();
+            return Ok();
         }
 
-
+        
+        //Updates a game by id
+        //Only admins can access this endpoint
+        //204NoContent is returned if the request is successful
+        //400BadRequest is returned if the request is invalid
+        //401Unauthorized is returned if the user is not authorized
+        //404NotFound is returned if the game is not found
+        //409Conflict is returned if the game already exists
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -71,6 +93,11 @@ namespace GameShop.API.Controllers
         }
 
 
+        //Deletes a game by id
+        //Only admins can access this endpoint
+        //204NoContent is returned if the request is successful
+        //401Unauthorized is returned if the user is not authorized
+        //404NotFound is returned if the game is not found
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
