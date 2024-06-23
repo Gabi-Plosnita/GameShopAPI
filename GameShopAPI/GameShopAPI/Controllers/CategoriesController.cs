@@ -16,7 +16,9 @@ namespace GameShop.API.Controllers
             _categoryService = categoryService;
         }
 
-
+        //Returns all categories
+        //Can be accessed by anyone
+        //200Ok is returned if the request is successful
         [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -25,7 +27,11 @@ namespace GameShop.API.Controllers
             return Ok(_categoryService.GetAll());
         }
 
-
+        //Returns a category by id
+        //Can't be accessed by anyone
+        //200Ok is returned if the request is successful
+        //401Unauthorized is returned if the user is not authorized
+        //404NotFound is returned if the category is not found
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -35,7 +41,12 @@ namespace GameShop.API.Controllers
             return Ok(_categoryService.GetById(id));
         }
 
-
+        //Creates a new category
+        //Can't be accessed by anyone
+        //201Created is returned if the request is successful
+        //400BadRequest is returned if the request is invalid
+        //401Unauthorized is returned if the user is not authorized
+        //409Conflict is returned if the category already exists
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -52,7 +63,13 @@ namespace GameShop.API.Controllers
             return Created();
         }
 
-
+        //Updates a category by id
+        //Can't be accessed by anyone
+        //204NoContent is returned if the request is successful
+        //400BadRequest is returned if the request is invalid
+        //401Unauthorized is returned if the user is not authorized
+        //404NotFound is returned if the category is not found
+        //409Conflict is returned if the category already exists
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -70,7 +87,12 @@ namespace GameShop.API.Controllers
             return NoContent();
         }
 
-
+        //Deletes a category by id
+        //Can't be accessed by anyone
+        //204NoContent is returned if the request is successful
+        //401Unauthorized is returned if the user is not authorized
+        //404NotFound is returned if the category is not found
+        //409Conflict is returned if the category has games associated with it
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
