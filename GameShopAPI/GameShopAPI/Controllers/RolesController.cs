@@ -100,7 +100,7 @@ namespace GameShop.API.Controllers
         //204NoContent is returned if the request is successful
         //401Unauthorized is returned if the user is not authorized
         //404NotFound is returned if the role is not found
-        //409Conflict is returned if the role is in use
+        //409Conflict is returned if the role has active users
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
