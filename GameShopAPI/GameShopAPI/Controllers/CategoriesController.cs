@@ -48,7 +48,7 @@ namespace GameShop.API.Controllers
         //401Unauthorized is returned if the user is not authorized
         //409Conflict is returned if the category already exists
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
