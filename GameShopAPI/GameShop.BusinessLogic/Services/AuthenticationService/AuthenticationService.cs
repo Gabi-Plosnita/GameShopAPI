@@ -33,7 +33,7 @@ namespace GameShop.BusinessLogic.Services
                 issuer: "Backend",
                 audience: "Frontend",
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: creds
                 );
 
