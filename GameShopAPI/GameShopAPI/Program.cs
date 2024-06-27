@@ -1,6 +1,5 @@
 using GameShop.API.Middleware;
 using GameShop.BusinessLogic.Extensions;
-using GameShop.DataAccess.DataContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
